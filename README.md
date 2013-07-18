@@ -1,6 +1,10 @@
 less.js
 =======
 
+This version of LESS has been modified to support quoted attribute names within attribute selectors.
+
+---
+
 The **dynamic** stylesheet language.
 
 <http://lesscss.org>
