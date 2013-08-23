@@ -1,7 +1,7 @@
 #
 # Run all tests
 #
-test: 
+test:
 	node test/less-test.js
 
 #
@@ -57,7 +57,7 @@ install: less
 
 browser-prepare: less
 	node test/browser-test-prepare.js
-	
+
 browser-test: browser-prepare
 	phantomjs test/browser/phantom-runner.js
 

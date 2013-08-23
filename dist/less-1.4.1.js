@@ -110,7 +110,7 @@ less.Parser = function Parser(env) {
                 parserImporter.files[fullPath] = root;                        // Store the root
 
                 if (e && !parserImporter.error) { parserImporter.error = e; }
-                
+
                 callback(e, root, imported);
             }, env);
         }
@@ -349,7 +349,7 @@ less.Parser = function Parser(env) {
                             }
                         }
                     }
-                    
+
                     switch (c) {
                         case '{': if (! inParam) { level ++;        chunk.push(c);                           break }
                         case '}': if (! inParam) { level --;        chunk.push(c); chunks[++j] = chunk = []; break }
@@ -357,7 +357,7 @@ less.Parser = function Parser(env) {
                         case ')': if (  inParam) { inParam = false; chunk.push(c);                           break }
                         default:                                    chunk.push(c);
                     }
-                    
+
                     i++;
                 }
                 if (level != 0) {
@@ -395,7 +395,7 @@ less.Parser = function Parser(env) {
                     options = options || {};
                     var importError,
                         evalEnv = new tree.evalEnv(options);
-                        
+
                     //
                     // Allows setting variables with a hash, so:
                     //
@@ -764,7 +764,7 @@ less.Parser = function Parser(env) {
                 //
                 unicodeDescriptor: function () {
                     var ud;
-                    
+
                     if (ud = $(/^U\+[0-9a-fA-F?]+(\-[0-9a-fA-F?]+)?/)) {
                         return new(tree.UnicodeDescriptor)(ud[0]);
                     }
@@ -824,7 +824,7 @@ less.Parser = function Parser(env) {
                     extendList.push(new(tree.Extend)(new(tree.Selector)(elements), option, index));
 
                 } while($(","))
-                
+
                 expect(/^\)/);
 
                 if (isRule) {
@@ -840,7 +840,7 @@ less.Parser = function Parser(env) {
             extendRule: function() {
                 return this.extend(true);
             },
-            
+
             //
             // Mixins
             //
@@ -1020,7 +1020,7 @@ less.Parser = function Parser(env) {
                             furthest = i;
                             restore();
                         }
-                        
+
                         $(this.comment);
 
                         if ($(/^when/)) { // Guard
@@ -1160,13 +1160,14 @@ less.Parser = function Parser(env) {
 
                 if (! $('[')) return;
 
-                // Kumu extension to allow attribute names to be quoted in order to 
+                // Kumu extension to allow attribute names to be quoted in order to
                 // include spaces and other special characters.
                 if (!(key = $(this.entities.variableCurly) || $(this.entities.quoted))) {
                     key = expect(/^(?:[_A-Za-z0-9-\*]*\|)?(?:[_A-Za-z0-9-]|\\.)+/);
                 }
 
-                if ((op = $(/^[|~*$^]?=/))) {
+                // Kumu extension to allow <, <=, >=, and >
+                if ((op = $(/^[|~*$^<>]?=/) || (op = $(/^[<>]/)))) {
                     val = $(this.entities.quoted) || $(/^[\w-]+/) || $(this.entities.variableCurly);
                 }
 
@@ -1191,7 +1192,7 @@ less.Parser = function Parser(env) {
             //
             ruleset: function () {
                 var selectors = [], s, rules, debugInfo;
-                
+
                 save();
 
                 if (env.dumpLineNumbers)
@@ -1391,7 +1392,7 @@ less.Parser = function Parser(env) {
                 save();
 
                 name = $(/^@[a-z-]+/);
-                
+
                 if (!name) return;
 
                 nonVendorSpecificName = name;

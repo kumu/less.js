@@ -2,3 +2,10 @@
 ["attribute name"="attribute value"] {
   display: none;
 }
+
+[attr<0],
+[attr<=0],
+[attr>=0],
+[attr>0] {
+  color: green;
+}
