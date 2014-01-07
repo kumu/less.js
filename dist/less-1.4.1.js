@@ -1401,6 +1401,9 @@ less.Parser = function Parser(env) {
                 }
 
                 switch(nonVendorSpecificName) {
+                    case "@settings":
+                        hasBlock = true;
+                        break;
                     case "@font-face":
                         hasBlock = true;
                         break;
