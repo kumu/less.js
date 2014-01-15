@@ -1160,14 +1160,19 @@ less.Parser = function Parser(env) {
 
                 if (! $('[')) return;
 
+                // Kumu extension to allow [!attr] absence test
+                if ($(/^!/)) {
+                    op = '!';
+                }
+
                 // Kumu extension to allow attribute names to be quoted in order to
                 // include spaces and other special characters.
                 if (!(key = $(this.entities.variableCurly) || $(this.entities.quoted))) {
                     key = expect(/^(?:[_A-Za-z0-9-\*]*\|)?(?:[_A-Za-z0-9-]|\\.)+/);
                 }
 
-                // Kumu extension to allow <, <=, >=, and >
-                if ((op = $(/^[|~*$^<>]?=/) || (op = $(/^[<>]/)))) {
+                // Kumu extension to allow !, !=, <, <=, >=, and >
+                if (!op && (op = $(/^[!|~*$^<>]?=/) || (op = $(/^[<>]/)))) {
                     val = $(this.entities.quoted) || $(/^[\w-]+/) || $(this.entities.variableCurly);
                 }
 
@@ -3069,7 +3074,10 @@ tree.Attribute.prototype = {
     toCSS: function (env) {
         var value = this.key.toCSS ? this.key.toCSS(env) : this.key;
 
-        if (this.op) {
+        // Kumu extension to handle [!attr] absence test
+        if (this.op == '!') {
+            value = '!' + value;
+        } else if (this.op) {
             value += this.op;
             value += (this.value.toCSS ? this.value.toCSS(env) : this.value);
         }
