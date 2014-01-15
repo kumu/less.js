@@ -1,12 +1,16 @@
 @settings {
   theme: light;
 }
-
-/* element: legend label */
+[!attr] {
+  display: none;
+}
+/* comment */
 ["attribute name"="attribute value"] {
   display: none;
 }
-
+["attribute name"!="attribute value"] {
+  display: none;
+}
 [attr<0],
 [attr<=0],
 [attr>=0],
