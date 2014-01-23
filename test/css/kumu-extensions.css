@@ -1,5 +1,8 @@
 @settings {
   theme: light;
+  include: #one, .two, three["attribute name"="attribute value"]:four;
+  ignore: #one, .two, three["attribute name"="attribute value"]:four;
+  focus: #one, .two out 3, three["attribute name"="attribute value"]:four out 1;
 }
 [!attr] {
   display: none;
