@@ -1236,6 +1236,17 @@ less.Parser = function Parser(env) {
 
                     important = $(this.important);
 
+                    // kumu catch all extension since values can't include selectors
+                    // required for focus, include, and ignore settings. Won't work if value
+                    // includes a semicolon.
+                    //
+                    // @settings {
+                    //   include: #one, a.b["attr name"="attr value"];
+                    // }
+                    if (!value && /^(focus|include|ignore)$/.test(name)) {
+                        value = new(tree.Value)([new(tree.Anonymous)($(/[^;]+/))]);
+                    }
+
                     if (value && $(this.end)) {
                         return new(tree.Rule)(name, value, important, memo, env.currentFileInfo);
                     } else {
