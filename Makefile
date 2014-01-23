@@ -5,6 +5,12 @@ test:
 	node test/less-test.js
 
 #
+# Run Kumu extension tests
+#
+test-kumu:
+	node test/less-test.js kumu-extensions
+
+#
 # Run benchmark
 #
 benchmark:
