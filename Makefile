@@ -24,6 +24,7 @@ HEADER = build/header.js
 VERSION = `cat package.json | grep version \
 														| grep -o '[0-9]\.[0-9]\.[0-9]\+'`
 DIST = dist/less-${VERSION}.js
+DIST_LATEST = dist/less.js
 RHINO = dist/less-rhino-${VERSION}.js
 DIST_MIN = dist/less-${VERSION}.min.js
 KUMU = ../../kumu/vendor/assets/javascripts/auto/less.js
@@ -55,11 +56,8 @@ less:
 	      ${SRC}/browser.js\
 	      build/amd.js >> ${DIST}
 	@@echo "})(window);" >> ${DIST}
+	@@cp -f ${DIST} ${DIST_LATEST}
 	@@echo ${DIST} built.
-
-install: less
-	@@cp ${DIST} ${KUMU}
-	@@echo installed to ${KUMU}
 
 browser-prepare: less
 	node test/browser-test-prepare.js
