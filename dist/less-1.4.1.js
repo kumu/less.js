@@ -1238,7 +1238,7 @@ less.Parser = function Parser(env) {
                     //
                     // TODO: Should we handle this with a try/catch block instead so
                     // it'll work for any property?
-                    if (/^(focus|include|ignore)$/.test(name)) {
+                    if (/^(focus|include|ignore|showcase)$/.test(name)) {
                         value = new(tree.Value)([new(tree.Anonymous)($(/[^;]+/))]);
                         important = false;
                     } else {

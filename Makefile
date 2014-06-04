@@ -27,7 +27,6 @@ DIST = dist/less-${VERSION}.js
 DIST_LATEST = dist/less.js
 RHINO = dist/less-rhino-${VERSION}.js
 DIST_MIN = dist/less-${VERSION}.min.js
-KUMU = ../../kumu/vendor/assets/javascripts/auto/less.js
 
 browser-prepare: DIST := test/browser/less.js
 
