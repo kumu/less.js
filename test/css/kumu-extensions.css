@@ -1,5 +1,6 @@
 @settings {
   theme: light;
+  include: ["Label"="One"];
   include: element["label"="one"];
   include: #one, .two, three["attribute name"="attribute value"]:four;
   ignore: #one, .two, three["attribute name"="attribute value"]:four;
