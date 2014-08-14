@@ -1,3 +1,4 @@
+@import "test";
 @settings {
   theme: light;
   include: ["Label"="One"];

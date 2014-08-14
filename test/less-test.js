@@ -40,7 +40,7 @@ runTestSet({strictMath: true, strictUnits: true}, "errors/", function(name, err,
         } else {
             var errMessage = less.formatError(err);
             if (errMessage === expectedErr) {
-                ok('OK');                    
+                ok('OK');
             } else {
                 difference("FAIL", expectedErr, errMessage);
             }
@@ -63,7 +63,7 @@ runTestSet({strictMath: true, dumpLineNumbers: 'all'}, "debug/", null,
            function(name) { return name + '-all'; });
 runTestSet({strictMath: true, relativeUrls: false, rootpath: "folder (1)/"}, "static-urls/");
 runTestSet({strictMath: true, compress: true}, "compression/");
-runTestSet({strictMath: false}, "legacy/");
+// runTestSet({strictMath: false}, "legacy/");
 testNoOptions();
 
 function globalReplacements(input, directory) {
@@ -93,11 +93,13 @@ function runTestSet(options, foldername, verifyFunction, nameModifier, doReplace
 
     fs.readdirSync(path.join('test/less/', foldername)).forEach(function (file) {
         if (! /\.less/.test(file)) { return }
-        
+        if (/import/.test(file))   { return }
+        if (/\.skip$/.test(file))  { return }
+
         var name = foldername + path.basename(file, '.less');
-        
+
         if (oneTestOnly && name !== oneTestOnly) { return; }
-        
+
         totalTests++;
 
         toCSS(options, path.join('test/less/', foldername + file), function (err, less) {
@@ -109,7 +111,7 @@ function runTestSet(options, foldername, verifyFunction, nameModifier, doReplace
             if(nameModifier) css_name=nameModifier(name);
             fs.readFile(path.join('test/css', css_name) + '.css', 'utf8', function (e, css) {
                 sys.print("- " + css_name + ": ")
-                
+
                 css = css && doReplacements(css, 'test/less/' + foldername);
                 if (less === css) { ok('OK'); }
                 else if (err) {
@@ -143,7 +145,7 @@ function fail(msg) {
 function difference(msg, left, right) {
     sys.print(stylize(msg, 'yellow'));
     failedTests++;
-                
+
     diff(left, right);
     endTest();
 }
@@ -181,7 +183,7 @@ function toCSS(options, path, callback) {
     options = options || {};
     fs.readFile(path, 'utf8', function (e, str) {
         if (e) { return callback(e) }
-        
+
         options.paths = [require('path').dirname(path)];
         options.filename = require('path').resolve(process.cwd(), path);
         options.optimization = options.optimization || 0;

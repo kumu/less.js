@@ -32,8 +32,6 @@
     url: url(@a);
 }
 
-@import "import/import-and-relative-paths-test";
-
 #data-uri {
   uri: data-uri('image/jpeg;base64', '../data/image.jpg');
 }
@@ -50,8 +48,3 @@
 #data-uri-toobig {
   uri: data-uri('../data/data-uri-fail.png');
 }
-.add_an_import(@file_to_import) {
-@import "@{file_to_import}";
-}
-
-.add_an_import("file.css");
