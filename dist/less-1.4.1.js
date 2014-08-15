@@ -1238,6 +1238,8 @@ less.Parser = function Parser(env) {
                     //
                     // TODO: Should we handle this with a try/catch block instead so
                     // it'll work for any property?
+                    //
+                    // TODO: Rework this to allow variables within selectors.
                     if (/^(focus|include|ignore|showcase)$/.test(name)) {
                         value = new(tree.Value)([new(tree.Anonymous)($(/[^;]+/))]);
                         important = false;
@@ -1405,7 +1407,9 @@ less.Parser = function Parser(env) {
 
                 if (input.charAt(i) !== '@') return;
 
-                if (value = $(this['import']) || $(this.media)) {
+                // Kumu: We handle imports on our own now
+                // if (value = $(this['import']) || $(this.media)) {
+                if (value = $(this.media)) {
                     return value;
                 }
 
