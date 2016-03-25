@@ -2,6 +2,32 @@
 
 @theme: light;
 
+@controls {
+  top {
+    label {
+      value: "Map title";
+    }
+
+    text {
+      value: "Longer map description";
+    }
+  }
+
+  bottom {
+    toggle {
+      action: cluster;
+
+      option {
+        value: "skills";
+      }
+
+      option {
+        value: "interests";
+      }
+    }
+  }
+}
+
 @settings {
   theme: @theme;
   include: ["Label"="One"];

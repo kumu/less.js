@@ -1,4 +1,21 @@
 @import "test";
+@controls {
+  top label {
+    value: "Map title";
+  }
+  top text {
+    value: "Longer map description";
+  }
+  bottom toggle {
+    action: cluster;
+  }
+  bottom toggle option {
+    value: "skills";
+  }
+  bottom toggle option {
+    value: "interests";
+  }
+}
 @settings {
   theme: light;
   include: ["Label"="One"];

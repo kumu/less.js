@@ -1425,6 +1425,9 @@ less.Parser = function Parser(env) {
                 }
 
                 switch(nonVendorSpecificName) {
+                    case "@controls":
+                        hasBlock = true;
+                        break;
                     case "@settings":
                         hasBlock = true;
                         break;
@@ -1655,7 +1658,6 @@ if (less.mode === 'browser' || less.mode === 'rhino') {
             }, true);
     };
 }
-
 (function (tree) {
 
 tree.functions = {
